@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex-col items-center justify-items-center ">
+      <div className="p-[20px] max-[1028px]:text-center flex-col items-center justify-items-center ">
         <h1>A fast, rich and dynamic React Dropdown component</h1>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown">Source on Github</a></div>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown/blob/main/packages/components/dropdown/search.ts">Search implementation on Github</a></div>
