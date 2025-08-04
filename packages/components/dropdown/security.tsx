@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { Popup, PopupContentProps, SemanticShorthandItem } from "semantic-ui-react";
 import numeral from "numeral";
 import { format as numFormat } from "@/packages/utils/number";
+import { type Security } from "@/packages/types/types";
 
 import DynamicRow, {
   formatAsString,
   StyledCell,
   calculateColumnTemplate as origCalcTemplate,
 } from "./dynamic_row";
-import { type Security } from "./types";
 
 export type SecurityField = {
   field: keyof Security;

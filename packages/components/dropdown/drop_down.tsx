@@ -1008,7 +1008,7 @@ class InternalSecuritiesDD extends React.Component<DropdownProps, DropdownState>
     const optionsSortDirection = this.state.optionsSortDirection === "DESC" ? "ASC" : "DESC";
 
     this.setState({
-      optionsSortField: field.field,
+      optionsSortField: field.field as keyof SecurityType,
       optionsSortDirection,
     });
   };

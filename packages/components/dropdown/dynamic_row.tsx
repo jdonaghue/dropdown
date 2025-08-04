@@ -4,7 +4,7 @@ import _ from "lodash";
 import React, { memo } from "react";
 import { renderToString } from "react-dom/server";
 import styled from "styled-components";
-import { Security, Sortable, WithWidth } from "./types";
+import { Security, Sortable, WithWidth } from "@/packages/types/types";
 import { SecurityField } from "./security";
 
 const MARGIN = 0;
@@ -104,7 +104,7 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
 
     const longestWidth = data.reduce((acc, security) => {
       if (security && security.hasOwnProperty(field.field)) {
-        node.innerText = formatAsString(field.formatter, security[field.field], security);
+        node.innerText = formatAsString(field.formatter, security[field.field as keyof Security], security);
         if (node.offsetWidth > acc) {
           acc = node.offsetWidth;
         }
@@ -117,7 +117,7 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
 
   const fieldsWithNoData = fields.reduce((acc, field) => {
     if (field.exists) {
-      if (!data.some((security) => field.exists?.(security[field.field], security))) {
+      if (!data.some((security) => field.exists?.(security[field.field as keyof Security], security))) {
         acc.push(field);
       }
     } else {
@@ -195,7 +195,7 @@ export type CellContainerProps = {
 const CellContainer = function ({ field, position, security, template, Cell, emptyAble }: CellContainerProps) {
   return (
     <Cell data-field={field.field} width={template[position]} className={`${template[position] === "0px" && emptyAble ? "empty-able" : ""}`}>
-      {(field.formatter ? field.formatter(security[field.field], security) : security[field.field]) as string}
+      {(field.formatter ? field.formatter(security[field.field as keyof Security], security) : security[field.field as keyof Security]) as string}
     </Cell>
   );
 };
@@ -232,7 +232,7 @@ const DynamicRow = memo(({
   return (
     <Grid width={`${widthNumber}px`} title={title} className={`${emptyAble ? `${className} empty-able` : className}`} onClick={onClick} $template={template}>
       {fields.map((field, index) => (
-        <CellContainer key={field.field} field={field} position={index} security={security} template={template} Cell={Cell} emptyAble={emptyAble} />
+        <CellContainer key={field.field as string} field={field} position={index} security={security} template={template} Cell={Cell} emptyAble={emptyAble} />
       ))}
     </Grid>
   );
