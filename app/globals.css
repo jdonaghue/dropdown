@@ -29,3 +29,10 @@ body {
 .security-dropdown {
   width: 700px;
 }
+
+@media only screen and (max-width: 768px) {
+  /* Styles applied when the screen width is 768px or less */
+  .container {
+    width: 80vw;
+  }
+}
