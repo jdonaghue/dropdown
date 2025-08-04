@@ -84,16 +84,16 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
     widthCache[uuid] = dropdownWidth;
   }
 
+  const node = document.createElement("div");
+  node.style.visibility = "hidden";
+  node.style.display = "inline-block";
+  node.style.fontSize = fontSize;
+  document.body.appendChild(node);
+
   const widths = fields.map((field, i) => {
     if (field == null) {
       return 0;
     }
-
-    const node = document.createElement("div");
-    node.style.visibility = "hidden";
-    node.style.display = "inline-block";
-    node.style.fontSize = fontSize;
-    document.body.appendChild(node);
 
     let minWidth = 0;
 
@@ -114,6 +114,8 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
 
     return (longestWidth + 18);
   });
+
+  node.remove();
 
   const fieldsWithNoData = fields.reduce((acc, field) => {
     if (field.exists) {

@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# A fast, rich, and dynamic React Dropdown component
 
-## Getting Started
+## Source for the component is:
 
-First, run the development server:
+`/packages/components/dropdown`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Search implementation:
+
+`/packages/components/dropdown/search.ts`
+
+### Search algorithm:
+
+Filters the existing options collection by applying the `query` to `keywords`
+for the option.
+
+When there is a type ahead we should sort the results in ASC order by assigning
+points to each record based on the terms in the tokenized search query.
+
+Here is how we calculate the points:
+
+```ts
+const propertyList = [
+  "defaultSecurityId", // 1 point
+  "issuerCode", // 2 points
+  "name", // 3 points
+];
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Parse the search query by the `/\s+/g` token into individual terms while respecting the space characters within quotes and treating each entire quoted text as a single term.
+2. For each term in the parsed query (process left-to-right):
+   1. For each record `a` and `b` (the left and right side of the sort respectively):
+      1. For each property in the `propertyList` above, in positional order, find the lowest positioned `exact` match out of all the terms.
+         Meaning, get the value of that property in the record and see if it's an `exact` match with the current term.
+      2. For each property in the `propertyList` above, in positional order, find the lowest positioned `start` match out of all the terms.
+         Meaning, get the value of that property in the record and see if it's an `start` match with the current term.
+      3. For each property in the `propertyList` above, in positional order, find the lowest positioned `contains` match out of all the terms.
+         Meaning, get the value of that property in the record and see if it's an `contains` match with the current term.
+   2. Calculate the point value the term has based on if it found a match, which position in the `propertyList` was it, see `Points Chart` below
+3. Add all of the points collected for all of the terms for record `a` together
+4. Add all of the points collected for all of the terms for record `b` together
+5. The record (`a` or `b`) that has the lowest points wins and goes to the left in the sort
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`Points Chart`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+no match => 1000 points
+exact match => property points * 1 point
+starts with match => property points * 5 points
+fuzzy match => property points * 10 points
+```
