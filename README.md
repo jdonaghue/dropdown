@@ -16,7 +16,7 @@ for the option.
 When there is a type ahead we should sort the results in ASC order by assigning
 points to each record based on the terms in the tokenized search query.
 
-Here is how we calculate the points:
+Here is how we calculate the points that ultimately determine sort order:
 
 ```ts
 const propertyList = [

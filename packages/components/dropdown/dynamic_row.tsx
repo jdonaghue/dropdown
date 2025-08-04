@@ -49,8 +49,6 @@ export const StyledCell = styled.div<Partial<WithWidth & Sortable>>`
   }
 `;
 
-const DEFAULT_WIDTH = "550px";
-
 const formatCache: Record<string, string> = {};
 const templateCache: Record<string, string[]> = {};
 const widthCache: Record<string, string> = {};
