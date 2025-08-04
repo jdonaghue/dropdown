@@ -2,11 +2,11 @@
 
 ## Source for the component is:
 
-`/packages/components/dropdown`
+[/packages/components/dropdown](/packages/components/dropdown)
 
 ## Search implementation:
 
-`/packages/components/dropdown/search.ts`
+[/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
 
 ### Search algorithm:
 
