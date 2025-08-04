@@ -169,7 +169,7 @@ export type DropdownProps = {
   setSecurity?: (security: SecurityType, oldSecurity?: SecurityType) => void;
   onSearchClear?: () => void;
   compileTemplate: (securities: (SecurityType | undefined)[], config: TemplateConfig) => string[];
-  registerSecuritiesWithProviderMemoized: (securities: SecurityType[], config: TemplateConfig, type: TemplateType) => string[];
+  registerSecuritiesWithProviderMemoized: (securities: SecurityType[], sort: keyof SecurityType, sortDirection: "ASC" | "DESC", config: TemplateConfig, type: TemplateType) => string[];
   onSearchChange?: (e: Event, value: { searchQuery: string }) => void;
   sorter?: (sortField: keyof SecurityType, sortDirection: "ASC" | "DESC") => (a?: SecurityType, b?: SecurityType) => number;
   withinProvider?: boolean;
@@ -715,11 +715,15 @@ class InternalSecuritiesDD extends React.Component<DropdownProps, DropdownState>
 
     const templateForText = registerSecuritiesWithProviderMemoized(
       security ? [security] : [],
+      this.state.optionsSortField,
+      this.state.optionsSortDirection,
       composeCompileConfiguration(this, true, true, this.state.uuid),
       TemplateType.TEXT
     );
     const templateForOptions = registerSecuritiesWithProviderMemoized(
       security ? [security] : [],
+      this.state.optionsSortField,
+      this.state.optionsSortDirection,
       composeCompileConfiguration(this, noHeaders, false, this.state.uuid),
       TemplateType.OPTIONS
     );
@@ -756,11 +760,15 @@ class InternalSecuritiesDD extends React.Component<DropdownProps, DropdownState>
 
     const templateForText = registerSecuritiesWithProviderMemoized(
       disabledSecurities,
+      this.state.optionsSortField,
+      this.state.optionsSortDirection,
       composeCompileConfiguration(this, true, true, this.state.uuid),
       TemplateType.TEXT
     );
     const templateForOptions = registerSecuritiesWithProviderMemoized(
       securities,
+      this.state.optionsSortField,
+      this.state.optionsSortDirection,
       composeCompileConfiguration(this, noHeaders, false, this.state.uuid),
       TemplateType.OPTIONS,
     );
@@ -903,6 +911,7 @@ class InternalSecuritiesDD extends React.Component<DropdownProps, DropdownState>
 
       if (this.isOpen) {
         optionsToRender = this.renderAllSecuritiesOptions();
+        optionsToRender = this.applyChangeSetsQueueOntoOptions(toProcess.slice(), optionsToRender);
         const doCompile = needsCompile(optionsToRender);
         const addSortHeader = !noHeaders && (needsSort(optionsToRender) || header == null || doCompile);
 
@@ -972,11 +981,16 @@ class InternalSecuritiesDD extends React.Component<DropdownProps, DropdownState>
 
           templateForText = registerSecuritiesWithProviderMemoized(
             self.props.disabledSecurities ?? [],
+            this.state.optionsSortField,
+            this.state.optionsSortDirection,
             composeCompileConfiguration(self, true, true, self.state.uuid),
             TemplateType.TEXT
           );
           templateForOptions = registerSecuritiesWithProviderMemoized(
-            securities, composeCompileConfiguration(self, noHeaders, false, self.state.uuid),
+            securities,
+            this.state.optionsSortField,
+            this.state.optionsSortDirection,
+            composeCompileConfiguration(self, noHeaders, false, self.state.uuid),
             TemplateType.OPTIONS
           );
 

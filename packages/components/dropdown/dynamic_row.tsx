@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Security, Sortable, WithWidth } from "@/packages/types/types";
 import { SecurityField } from "./security";
 
-const MARGIN = 0;
+const MARGIN = 10;
 
 export const StyledGrid = styled.div<Partial<WithWidth>>`
   font-size: 13px;
@@ -137,7 +137,7 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
   }
 
   if (contain) {
-    const totalWidths = widths.reduce((acc, w) => acc + (showHeaders ? w + MARGIN : w > 0 ? w + MARGIN : 0), 0);
+    const totalWidths = widths.reduce((acc, w) => acc + (showHeaders ? w + MARGIN : w > 0 ? w : 0), 0);
     let overflow =  totalWidths - Number((dropdownWidth as string).replace("px", ""));
     if (overflow > 0) {
       let zeroedOut = 0;

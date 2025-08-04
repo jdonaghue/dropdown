@@ -34,7 +34,6 @@ export const StyledGrid = styled.div<GridProps>`
   grid-template-columns: ${(props) => {
     return props.$template?.join(" ");
   }};
-  gap: 7px;
   cursor: pointer;
 `;
 

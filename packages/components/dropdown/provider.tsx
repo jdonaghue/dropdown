@@ -16,6 +16,8 @@ export type SecurityContextValue = {
   ) => string[];
   registerSecuritiesWithProviderMemoized: (
     securities: Security[],
+    sort: keyof Security,
+    sortDirection: "ASC" | "DESC",
     compileConfig: TemplateConfig,
     type: TemplateType,
   ) => string[];
@@ -72,8 +74,8 @@ export default class SecuritiesDDProvider extends Component<PropsWithChildren> {
     };
   }
 
-  registerSecuritiesWithProviderMemoized = (securities: Security[], compileConfig: TemplateConfig, type: TemplateType) => {
-    const key = `${JSON.stringify(securities)}-${type}`;
+  registerSecuritiesWithProviderMemoized = (securities: Security[], sort: keyof Security, sortDirection: "ASC" | "DESC", compileConfig: TemplateConfig, type: TemplateType) => {
+    const key = `${JSON.stringify(securities)}-${type}-${sort}-${sortDirection}`;
 
     if (!this.cache[key]) {
       this.cache[key] = this.compileTemplate(securities, { contain: true, ...compileConfig, securities });
