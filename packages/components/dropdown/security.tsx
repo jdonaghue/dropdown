@@ -321,6 +321,7 @@ const SECURITY_COLUMNS: SecurityField[] = [
     field: "moodyRating",
     header: "Rating",
     formatter: ratingFormatter,
+    hideOnOverflow: true,
     exists: (val) => val != null,
   },
 ];
