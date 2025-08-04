@@ -315,6 +315,7 @@ const SECURITY_COLUMNS: SecurityField[] = [
     field: "maturityDate",
     header: "Maturity",
     formatter: maturityDateFormatter,
+    hideOnOverflow: true,
     exists: (val) => val != null,
   },
   {

@@ -30,6 +30,10 @@ type DynamicHeaderProps = {
 
 export const StyledGrid = styled.div<GridProps>`
   font-size: 13px;
+  @media only screen and (max-width: 1028px) {
+    font-size: 16px;
+    line-height: 16px;
+  }
   display: grid;
   grid-template-columns: ${(props) => {
     return props.$template?.join(" ");

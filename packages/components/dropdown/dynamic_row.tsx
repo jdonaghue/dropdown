@@ -11,6 +11,10 @@ const MARGIN = 10;
 
 export const StyledGrid = styled.div<Partial<WithWidth>>`
   font-size: 13px;
+  @media only screen and (max-width: 1028px) {
+    font-size: 16px;
+    line-height: 16px;
+  }
   white-space: nowrap;
   display: grid;
   grid-template-columns: ${(props) => {
@@ -29,6 +33,10 @@ export const StyledCell = styled.div<Partial<WithWidth & Sortable>>`
   display: inline-block;
   vertical-align: middle;
   font-size: 13px;
+  @media only screen and (max-width: 1028px) {
+    font-size: 16px;
+    line-height: 16px;
+  }
   margin-right: 10px;
 
   &.empty-able {
@@ -70,18 +78,18 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
     return templateCache[cacheKey];
   }
 
-  let dropdownWidth = widthCache[uuid] ?? contain
-    ? `${Number((width || DEFAULT_WIDTH).replace("px", "")) - (fields.length * 10)}px`
-    : null;
+  let dropdownWidth = widthCache[`${uuid}-${contain}`] ?? (contain && width
+    ? `${Number((width).replace("px", "")) - (fields.length * 10)}px`
+    : "");
   let fontSize = "13px";
 
-  if (!!currentNode && !widthCache[uuid] && dropdownWidth) {
+  if (widthCache[`${uuid}-${contain}`] == null && currentNode) {
     const computed = window.getComputedStyle(currentNode);
 
     fontSize = computed.fontSize;
     const rect = currentNode.getBoundingClientRect();
     dropdownWidth = `${rect.width - (fields.length * 10)}px`;
-    widthCache[uuid] = dropdownWidth;
+    widthCache[`${uuid}-${contain}`] = dropdownWidth;
   }
 
   const node = document.createElement("div");
@@ -112,7 +120,7 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
       return acc;
     }, minWidth);
 
-    return (longestWidth + 18);
+    return (longestWidth + 18 + (!contain ? MARGIN : 0));
   });
 
   node.remove();

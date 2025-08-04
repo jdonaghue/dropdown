@@ -35,4 +35,8 @@ body {
   .security-dropdown {
     width: 80vw;
   }
+
+  .security-dropdown .menu[role="listbox"] {
+    max-height: 200px !important;
+  }
 }
