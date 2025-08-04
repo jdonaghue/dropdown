@@ -1,0 +1,46 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+.ui.header,
+.ui.menu {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+}
+
+.ui.form input:not([type]),
+.ui.form input[type="date"],
+.ui.form input[type="datetime-local"],
+.ui.form input[type="email"],
+.ui.form input[type="file"],
+.ui.form input[type="number"],
+.ui.form input[type="password"],
+.ui.form input[type="search"],
+.ui.form input[type="tel"],
+.ui.form input[type="text"],
+.ui.form input[type="time"],
+.ui.form input[type="url"] {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+}
+
+@keyframes glowing {
+  0% {
+    background-color: #e0e1e2;
+    box-shadow: 0 0 3px #e0e1e2;
+  }
+  50% {
+    background-color: #ffe5e4;
+    box-shadow: 0 0 40px #ffe5e4;
+  }
+  100% {
+    background-color: #e0e1e2;
+    box-shadow: 0 0 3px #e0e1e2;
+  }
+}
+
+html,
+body {
+  font-size: 12px;
+}

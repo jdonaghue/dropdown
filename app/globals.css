@@ -25,3 +25,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.security-dropdown {
+  width: 700px;
+}

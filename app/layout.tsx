@@ -1,6 +1,10 @@
+// @ts-expect-error TS(2792): Cannot find module 'next'. Did you mean to set the... Remove this comment to see the full error message
 import type { Metadata } from "next";
+// @ts-expect-error TS(2792): Cannot find module 'next/font/local'. Did you mean... Remove this comment to see the full error message
 import localFont from "next/font/local";
 import "./globals.css";
+import "./semantic.min.css";
+import "./app.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
