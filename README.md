@@ -8,6 +8,10 @@
 
 [/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
 
+## Advanced typing
+
+[/packages/components/dropdown/drop_down.tsx#L215](/packages/components/dropdown/drop_down.tsx#L215)
+
 ### Search algorithm:
 
 Filters the existing options collection by applying the `query` to `keywords`

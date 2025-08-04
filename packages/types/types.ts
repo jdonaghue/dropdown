@@ -99,3 +99,27 @@ export type Option = {
   $needscompiling?: string;
   $needssorting?: string;
 };
+
+export type SecurityField = {
+  field: keyof Security;
+  header: string;
+  truncateOnOverflow?: boolean;
+  hideOnOverflow?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formatter?: (
+    val: any,
+    security: Security
+  ) => string | React.JSX.Element | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  exists?: (val: any, security: Security) => boolean;
+};
+
+export type TemplateConfig = {
+  securities: Security[];
+  width: string;
+  fields: SecurityField[];
+  node?: HTMLElement | null;
+  contain?: boolean;
+  showHeaders?: boolean;
+  uuid: string;
+};

@@ -3,8 +3,7 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 import { v1 as uuidv1 } from "uuid";
-import { Security, Sortable } from "@/packages/types/types";
-import { SecurityField } from "./security";
+import { Security, Sortable, SecurityField } from "@/packages/types/types";
 
 type GridProps = {
   width: string;

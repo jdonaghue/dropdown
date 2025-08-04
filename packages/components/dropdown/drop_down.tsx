@@ -6,15 +6,12 @@ import { Dropdown } from "semantic-ui-react";
 import { v1 as uuidv1 } from "uuid";
 
 import { sorter } from "@/packages/utils/securities";
-import { KeyWordType, Option, Security as SecurityType } from "@/packages/types/types";
+import { KeyWordType, Option, Security as SecurityType, TemplateConfig, SecurityField, } from "@/packages/types/types";
 
 import Security, {
   formatAsString,
   SECURITY_COLUMNS,
   SECURITY_COLUMNS_MAP,
-  DEFAULT_WIDTH,
-  TemplateConfig,
-  SecurityField,
   SecurityComponentProps
 } from "./security";
 import DynamicHeader from "./dynamic_header";
@@ -629,7 +626,7 @@ const computeChangeSetState = memoComputeChangeState((
 });
 
 const composeCompileConfiguration = (instance: InternalSecuritiesDD, forceNoHeaders = false, contain = false, uuid: string) => {
-  const { securities = [], width = DEFAULT_WIDTH, fields = SECURITY_COLUMNS, noHeaders } = instance.props;
+  const { securities = [], width, fields = SECURITY_COLUMNS, noHeaders } = instance.props;
 
   return {
     securities,
@@ -1041,7 +1038,7 @@ class InternalSecuritiesDD extends React.Component<DropdownProps, DropdownState>
     };
 
     const keywords = searchKeywordGenerator(security);
-    const text = <Security key={`${security.defaultSecurityId}-text`} {...{...securityProps, template: templateForText, width: this.props.width ?? DEFAULT_WIDTH, }} />;
+    const text = <Security key={`${security.defaultSecurityId}-text`} {...{...securityProps, template: templateForText, width: this.props.width, }} />;
     const content = <Security key={`${security.defaultSecurityId}-security`} {...{...securityProps, template: templateForOptions }} />;
     const { defaultSecurityId: value, name } = security;
     const { disabledSecurities = [] } = this.props;

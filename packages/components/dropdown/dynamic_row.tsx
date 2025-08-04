@@ -4,8 +4,7 @@ import _ from "lodash";
 import React, { memo } from "react";
 import { renderToString } from "react-dom/server";
 import styled from "styled-components";
-import { Security, Sortable, WithWidth } from "@/packages/types/types";
-import { SecurityField } from "./security";
+import { Security, Sortable, WithWidth, SecurityField } from "@/packages/types/types";
 
 const MARGIN = 10;
 
@@ -20,11 +19,6 @@ export const StyledGrid = styled.div<Partial<WithWidth>>`
   grid-template-columns: ${(props) => {
     return props.$template?.join(" ");
   }};
-
-
-  &.empty-able {
-    gap: 0;
-  }
 
   cursor: pointer;
 `;

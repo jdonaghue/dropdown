@@ -2,9 +2,9 @@
 
 import React, { Component, PropsWithChildren } from "react";
 import _ from "lodash";
-import { Security } from "@/packages/types/types";
+import { Security, TemplateConfig } from "@/packages/types/types";
 
-import { calculateColumnTemplateFromMap, TemplateConfig } from "./security";
+import { calculateColumnTemplateFromMap } from "./security";
 
 
 export type SecurityContextValue = {
