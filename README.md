@@ -4,10 +4,6 @@
 
 [/packages/components/dropdown](/packages/components/dropdown)
 
-## Search implementation:
-
-[/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
-
 ## Advanced typing
 
 ```ts
@@ -22,6 +18,10 @@ type ApplyMethodsType = {
 ```
 
 [/packages/components/dropdown/drop_down.tsx#L215](/packages/components/dropdown/drop_down.tsx#L215)
+
+## Search implementation:
+
+[/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
 
 ### Search algorithm:
 
