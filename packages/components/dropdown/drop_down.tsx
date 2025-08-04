@@ -210,8 +210,13 @@ type ChangeSet = {
 }
 
 type ApplyMethodsType = {
-  [K in (keyof DropdownProps | keyof DropdownState) as `apply_${string & K}Diff`]?: (self: InternalSecuritiesDD, options: Option[], diff?: ChangeSet) => Option[];
-}
+  [K in keyof DropdownProps | keyof DropdownState as `apply_${string &
+    K}Diff`]?: (
+    self: InternalSecuritiesDD,
+    options: Option[],
+    diff?: ChangeSet
+  ) => Option[];
+};
 
 const applyMethods: ApplyMethodsType = {
   /**
