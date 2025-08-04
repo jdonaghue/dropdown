@@ -1,10 +1,10 @@
 # A fast, rich, and dynamic React Dropdown component
 
-## Source for the component is:
+## Source for the component itself is at:
 
 [/packages/components/dropdown](/packages/components/dropdown)
 
-## Advanced typing
+## Advanced typing definitions:
 
 ```ts
 type ApplyMethodsType = {
@@ -19,11 +19,11 @@ type ApplyMethodsType = {
 
 [/packages/components/dropdown/drop_down.tsx#L215](/packages/components/dropdown/drop_down.tsx#L215)
 
-## Search implementation:
+## Search/sort implementation:
 
 [/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
 
-### Search algorithm:
+### Search/sort algorithm:
 
 Filters the existing options collection by applying the `query` to `keywords`
 for the option.
