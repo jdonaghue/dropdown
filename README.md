@@ -23,6 +23,14 @@ type ApplyMethodsType = {
 
 [/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
 
+### Features:
+
+- A custom query parser that understand the usage of quotes to escape spaces
+- Understands simple date formats
+- Considers numbers as a first class citizen
+- Fast!
+- Sorts the most meaningful results first (see algorithm below)
+
 ### Search/sort algorithm:
 
 Filters the existing options collection by applying the `query` to `keywords`
