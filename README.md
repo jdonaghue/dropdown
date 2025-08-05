@@ -25,7 +25,7 @@ type ApplyMethodsType = {
 
 ### Features:
 
-- A custom query parser that understand the usage of quotes to escape spaces
+- A custom query parser that understands quotes in order to group words and spaces together as individual tokens
 - Understands simple date formats
 - Considers numbers as a first class citizen
 - Fast!
