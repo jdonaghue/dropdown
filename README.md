@@ -19,7 +19,7 @@ type ApplyMethodsType = {
 
 [/packages/components/dropdown/drop_down.tsx#L215](/packages/components/dropdown/drop_down.tsx#L215)
 
-## Search/sort implementation:
+## Search/Sort implementation:
 
 [/packages/components/dropdown/search.ts](/packages/components/dropdown/search.ts)
 
@@ -31,7 +31,7 @@ type ApplyMethodsType = {
 - Fast!
 - Sorts the most meaningful results first (see algorithm below)
 
-### Search/sort algorithm:
+### Search/Sort algorithm:
 
 Filters the existing options collection by applying the `query` to `keywords`
 for the option.
