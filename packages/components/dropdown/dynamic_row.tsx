@@ -149,37 +149,75 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
     const totalWidths = widths.reduce((acc, w) => acc + (showHeaders ? w + MARGIN : w > 0 ? w : 0), 0);
     let overflow =  totalWidths - Number((dropdownWidth as string).replace("px", ""));
     if (overflow > 0) {
-      let zeroedOut = 0;
-      let index = 0;
-      for (const field of fields) {
-        if (field.hideOnOverflow) {
-          zeroedOut += widths[index];
-          widths[index] = 0;
-
-          if (overflow - zeroedOut <= 0) {
+      const sortedHideFields = fields.slice().sort((a, b) => {
+        if (a.hideOnOverflow == null && b.hideOnOverflow == null) {
+          return 0;
+        } else if (a.hideOnOverflow == null) {
+          return -1;
+        } else if (b.hideOnOverflow == null) {
+          return -1;
+        } else {
+          return b.hideOnOverflow - a.hideOnOverflow;
+        }
+      });
+      for (const field of sortedHideFields) {
+        if (field.hideOnOverflow != null) {
+          if (overflow < 0) {
             break;
           }
+
+          const index = fields.findIndex((f) => f.field === field.field);
+          const zeroedOut = widths[index];
+          widths[index] = 0;
+
+          if (overflow - zeroedOut === 0) {
+            break;
+          }
+
+          if (overflow - zeroedOut < 0 && field.truncateOnOverflow != null) {
+            widths[index] = Math.abs(overflow - zeroedOut);
+            break;
+          }
+          overflow -= zeroedOut;
         }
-        index++;
       }
 
-      overflow = Math.max(overflow - zeroedOut, 0);
-      if (overflow) {
-        const reductableIndices = fields.reduce((acc, field, i) => {
-          if (field && (field.truncateOnOverflow || fieldsWithNoData.includes(field))) {
-            acc.push(i);
+      if (overflow > 0) {
+         const sortedTruncateFields = fields.slice().sort((a, b) => {
+          if (a.truncateOnOverflow == null && b.truncateOnOverflow == null) {
+            return 0;
+          } else if (a.truncateOnOverflow == null) {
+            return -1;
+          } else if (b.truncateOnOverflow == null) {
+            return -1;
+          } else {
+            return b.truncateOnOverflow - a.truncateOnOverflow;
+          }
+        });
+        const reductableIndices = sortedTruncateFields.reduce((acc, field, i) => {
+          const index = fields.findIndex((f) => f.field === field.field);
+          if (field && (field.truncateOnOverflow != null || fieldsWithNoData.includes(field)) && widths[index] > 0) {
+            acc.push(index);
           }
           return acc;
         }, [] as number[]);
 
-        const totalReductableWidth = reductableIndices.reduce((acc, index) => acc + widths[index], 0);
-        const redistributableWidth = Math.abs(totalReductableWidth - overflow);
-
-        if (redistributableWidth > 0) {
+        let iterations = 0;
+        while (overflow > 0 && iterations < 3) {
           for (const index of reductableIndices) {
-            const proportion = widths[index] / totalReductableWidth;
-            widths[index] = redistributableWidth * proportion;
+            const widthToReduce = widths[index] * .3;
+            widths[index] -= widthToReduce;
+            overflow -= widthToReduce;
+
+            if (overflow < 0) {
+              widths[index] += Math.abs(overflow);
+            }
+
+            if (overflow <= 0) {
+              break;
+            }
           }
+          iterations++;
         }
       }
     }
@@ -202,7 +240,7 @@ export type CellContainerProps = {
 };
 
 const CellContainer = function ({ field, position, security, template, Cell, emptyAble }: CellContainerProps) {
-  let className = field.truncateOnOverflow ? "truncatable" : "";
+  let className = field.truncateOnOverflow != null ? "truncatable" : "";
   className = `${className} ${template[position] === "0px" && emptyAble ? "empty-able" : ""}`;
 
   return (

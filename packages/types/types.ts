@@ -103,8 +103,8 @@ export type Option = {
 export type SecurityField = {
   field: keyof Security;
   header: string;
-  truncateOnOverflow?: boolean;
-  hideOnOverflow?: boolean;
+  truncateOnOverflow?: number;
+  hideOnOverflow?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formatter?: (
     val: any,

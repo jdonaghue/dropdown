@@ -23,7 +23,7 @@ const securitiesWithMv = (securities as unknown as Security[])
 const fields = SECURITY_COLUMNS.concat({
   field: "acctAndMv",
   header: "Acct and Mv",
-  hideOnOverflow: true,
+  hideOnOverflow: 1,
   exists: () => true,
 });
 
