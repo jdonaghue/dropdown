@@ -9,54 +9,6 @@ export const compareIsoStrings = (s1: string, s2: string) => {
   return 0;
 };
 
-export const compareMoodyRatings = (r1: string, r2: string) => {
-  const ratings = [
-    "aaa",
-    "aa1",
-    "aa2",
-    "aa3",
-    "a1",
-    "a2",
-    "a3",
-    "aaa1",
-    "aaa2",
-    "aaa3",
-    "baa1",
-    "baa2",
-    "baa3",
-    "ba1",
-    "ba2",
-    "ba3",
-    "b1",
-    "b2",
-    "b3",
-    "caa1",
-    "caa2",
-    "caa3",
-    "ca",
-    "c",
-  ];
-
-  if (!r1 && !r2) return 0;
-
-  if (r1 && !r2) return -1;
-
-  if (!r1 && r2) return 1;
-
-  const i1 = ratings.findIndex((x) => x == r1.toLowerCase());
-  const i2 = ratings.findIndex((x) => x == r2.toLowerCase());
-
-  if (i2 == -1) return -1;
-
-  if (i1 == -1) return 1;
-
-  if (i1 < i2) return -1;
-
-  if (i1 > i2) return 1;
-
-  return 0;
-};
-
 type SecurityComparatorField = {
   field: keyof Security;
   comparator: (
@@ -115,7 +67,16 @@ const FIELDS = [
   },
   {
     field: "moodyRating",
-    comparator: compareMoodyRatings,
+    comparator: (a?: string, b?: string) => {
+      a = a || "";
+      b = b || "";
+      if (String(a).toLowerCase() < String(b).toLowerCase()) {
+        return -1;
+      } else if (String(a).toLowerCase() > String(b).toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    },
   },
   {
     field: "acctAndMv",
@@ -236,35 +197,3 @@ export const sorter = (field: keyof Security, direction = "ASC") => {
     }
   };
 };
-
-export function ensureInName(name: string, values: string[] = []) {
-  return values.reduce((acc, value) => {
-    if (
-      value != null &&
-      acc.toLowerCase().indexOf(value.toLowerCase()) === -1
-    ) {
-      return `${acc} ${value}`;
-    }
-    return acc;
-  }, name);
-}
-
-export function formatMaturityDate(maturityDate: string) {
-  if (maturityDate == null) {
-    return "";
-  }
-  const datePart = maturityDate.split("T")[0];
-  if (/\d{4}[-_]\d{1,2}[-_]\d{1,2}/.test(datePart)) {
-    const parts = datePart.split(/[_-]/g);
-    return `${parts[1].padStart(2, "0")}/${parts[2].padStart(2, "0")}/${
-      parts[0]
-    }`;
-  }
-  if (/\d{1,2}[/-_]\d{1,2}[/-_]\d{4}/.test(datePart)) {
-    const parts = datePart.split(/[/_-]/g);
-    return `${parts[0].padStart(2, "0")}/${parts[1].padStart(2, "0")}/${
-      parts[2]
-    }`;
-  }
-  return datePart;
-}
