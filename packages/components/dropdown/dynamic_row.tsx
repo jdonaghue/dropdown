@@ -27,11 +27,18 @@ export const StyledCell = styled.div<Partial<WithWidth & Sortable>>`
   display: inline-block;
   vertical-align: middle;
   font-size: 13px;
+
   @media only screen and (max-width: 1028px) {
     font-size: 16px;
     line-height: 16px;
   }
   margin-right: 10px;
+
+  &.truncatable {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
   &.empty-able {
     visibility: hidden;
@@ -195,8 +202,11 @@ export type CellContainerProps = {
 };
 
 const CellContainer = function ({ field, position, security, template, Cell, emptyAble }: CellContainerProps) {
+  let className = field.truncateOnOverflow ? "truncatable" : "";
+  className = `${className} ${template[position] === "0px" && emptyAble ? "empty-able" : ""}`;
+
   return (
-    <Cell data-field={field.field} width={template[position]} className={`${template[position] === "0px" && emptyAble ? "empty-able" : ""}`}>
+    <Cell data-field={field.field} width={template[position]} className={className}>
       {(field.formatter ? field.formatter(security[field.field as keyof Security], security) : security[field.field as keyof Security]) as string}
     </Cell>
   );

@@ -226,13 +226,6 @@ export const calculateColumnTemplateFromMap = (config: TemplateConfig) => {
 };
 
 export const Cell = styled(StyledCell)`
-
-  &.trucateable {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
   display: inline-block;
   vertical-align: middle;
   position: relative;
