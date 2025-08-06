@@ -174,8 +174,9 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
             break;
           }
 
-          if (overflow - zeroedOut < 0 && field.truncateOnOverflow != null) {
+          if (overflow - zeroedOut < 0) {
             widths[index] = Math.abs(overflow - zeroedOut);
+            overflow = 0;
             break;
           }
           overflow -= zeroedOut;
