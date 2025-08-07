@@ -1,5 +1,7 @@
 # A fast, rich, and dynamic React Dropdown component
 
+_note: this is not packaged for distribution, it is available here within this Next.js app for example only_
+
 ## Source for the component itself is at:
 
 [/packages/components/dropdown](/packages/components/dropdown)
