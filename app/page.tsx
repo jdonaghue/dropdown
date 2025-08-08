@@ -42,7 +42,7 @@ const StyledDynamicHeader = styled(DynamicHeader)`
   font-size: 14px;
 
   border: 1px solid grey;
-  background: #AAA;
+  background: #DDD;
 
   @media only screen and (max-width: 1028px) {
     & {
