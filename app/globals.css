@@ -26,17 +26,33 @@ body {
   }
 }
 
-.security-dropdown {
+.security-dropdown.ui.search {
   width: 700px;
+  font-size: 14px;
+}
+
+.security-dropdown.ui.search .menu[role="listbox"] {
+  max-height: 200px !important;
+  font-size: 14px;
+}
+
+.security-dropdown.ui.search .menu[role="listbox"] > .item {
+  font-size: 14px;
+}
+
+.security-dropdown.ui.search div.divider.text {
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 1028px) {
   /* Styles applied when the screen width is 768px or less */
-  .security-dropdown {
+  .security-dropdown.ui.search {
     width: 80vw;
+    font-size: 14px;
   }
 
-  .security-dropdown .menu[role="listbox"] {
+  .security-dropdown.ui.search .menu[role="listbox"] {
     max-height: 200px !important;
+    font-size: 14px;
   }
 }

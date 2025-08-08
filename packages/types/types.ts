@@ -122,4 +122,5 @@ export type TemplateConfig = {
   contain?: boolean;
   includeHeaders?: boolean;
   uuid: string;
+  fontSize?: string;
 };

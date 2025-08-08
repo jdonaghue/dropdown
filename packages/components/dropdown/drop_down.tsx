@@ -35,8 +35,6 @@ const StyledDropdown = styled(Dropdown)`
       }
     }};
     width: ${(props) => props.width};
-    min-height: 40px;
-    max-height: 40px;
 
     > .text {
       overflow: hidden;
@@ -639,7 +637,7 @@ const composeCompileConfiguration = (instance: InternalSecuritiesDD, forceNoHead
     fields,
     includeHeaders: noHeaders === false || (noHeaders == null && !forceNoHeaders),
     contain,
-    node: (instance.dropdownRef as any)?.current?.searchRef?.current,
+    node: (instance.dropdownRef as any)?.current?.searchRef?.current?.nextElementSibling,
     uuid,
   };
 };

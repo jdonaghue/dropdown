@@ -6,14 +6,9 @@ import { renderToString } from "react-dom/server";
 import styled from "styled-components";
 import { Security, Sortable, WithWidth, SecurityField } from "@/packages/types/types";
 
-const MARGIN = 10;
+const MARGIN = 20;
 
 export const StyledGrid = styled.div<Partial<WithWidth>>`
-  font-size: 13px;
-  @media only screen and (max-width: 1028px) {
-    font-size: 16px;
-    line-height: 16px;
-  }
   white-space: nowrap;
   display: grid;
   grid-template-columns: ${(props) => {
@@ -26,13 +21,6 @@ export const StyledGrid = styled.div<Partial<WithWidth>>`
 export const StyledCell = styled.div<Partial<WithWidth & Sortable>>`
   display: inline-block;
   vertical-align: middle;
-  font-size: 13px;
-
-  @media only screen and (max-width: 1028px) {
-    font-size: 16px;
-    line-height: 16px;
-  }
-  margin-right: 10px;
 
   &.truncatable {
     text-overflow: ellipsis;
@@ -57,6 +45,7 @@ const widthCache: Record<string, string> = {};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatAsString = (formatter: SecurityField['formatter'], value: any, security: Security): string => {
   const key = value + security.defaultSecurityId;
+
   if (formatCache[key]) return formatCache[key];
 
   let formatted = formatter ? formatter(value, security) : value;
@@ -69,33 +58,58 @@ export const formatAsString = (formatter: SecurityField['formatter'], value: any
   return formatCache[key];
 };
 
-export function calculateColumnTemplate(data: Security[], width: string, fields: SecurityField[], uuid: string, currentNode?: (HTMLElement | null), includeHeaders = false, contain = false) {
+export function calculateColumnTemplate(data: Security[], width: string, fontSize: string = "", fields: SecurityField[], uuid: string, currentNode?: (HTMLElement | null), includeHeaders = false, contain = false) {
   const sortedData = data.map(({ defaultSecurityId }: Partial<Security> = { defaultSecurityId: "empty" }) => defaultSecurityId).sort();
-  const cacheKey = `${JSON.stringify(sortedData)}-${includeHeaders === true ? "true" : "false"}-${contain === true ? "true" : "false"}`;
+  const cacheKey = `${width}-${JSON.stringify(sortedData)}-${includeHeaders === true ? "true" : "false"}-${contain === true ? "true" : "false"}`;
 
   if (templateCache[cacheKey]) {
     return templateCache[cacheKey];
   }
 
-  let dropdownWidth = widthCache[`${uuid}-${contain}`] ?? (contain && width
+  let dropdownWidth = widthCache[`${width}-${uuid}-${contain}`] ?? (contain && width
     ? `${Number((width).replace("px", "")) - (fields.length * 10)}px`
     : "");
-  let fontSize = "13px";
 
-  if (widthCache[`${uuid}-${contain}`] == null && currentNode) {
-    const computed = window.getComputedStyle(currentNode);
+  const fieldsWithNoData = fields.reduce((acc, field) => {
+    if (field.exists) {
+      if (!data.some((security) => field.exists?.(security[field.field as keyof Security], security))) {
+        acc.push(field);
+      }
+    } else {
+      if (!data.some((security) => security.hasOwnProperty(field.field))) {
+        acc.push(field);
+      }
+    }
+    return acc;
+  }, [] as SecurityField[]);
 
-    fontSize = computed.fontSize;
-    const rect = currentNode.getBoundingClientRect();
-    dropdownWidth = `${rect.width - (fields.length * 10)}px`;
-    widthCache[`${uuid}-${contain}`] = dropdownWidth;
+  if (widthCache[`${width}-${uuid}-${contain}`] == null) {
+    if (currentNode) {
+      const computed = window.getComputedStyle(currentNode);
+
+      fontSize = computed.fontSize;
+      const rect = currentNode.getBoundingClientRect();
+      dropdownWidth = `${rect.width}px`;
+      widthCache[`${width}-${uuid}-${contain}`] = dropdownWidth;
+    } else {
+      widthCache[`${width}-${uuid}-${contain}`] = width;
+      dropdownWidth = width;
+    }
   }
 
   const node = document.createElement("div");
   node.style.visibility = "hidden";
-  node.style.display = "inline-block";
+  node.style.display = "inline";
+  node.style.paddingRight = `${MARGIN}px`;
   node.style.fontSize = fontSize;
+  node.dataset.uuid = uuid;
   document.body.appendChild(node);
+
+  // if (window.getComputedStyle(node).fontSize === "12px") {
+  //   console.log({ here: "12px", uuid, fontSize, currentNode, node, contain, includeHeaders, width });
+  // } else {
+  //   console.log({ here: "not12px", uuid, fontSize, currentNode, node, contain, includeHeaders, width });
+  // }
 
   const widths = fields.map((field, i) => {
     if (field == null) {
@@ -119,34 +133,23 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
       return acc;
     }, minWidth);
 
-    return (longestWidth + 18 + (!contain ? MARGIN : 0));
+    return longestWidth;
   });
 
   node.remove();
 
-  const fieldsWithNoData = fields.reduce((acc, field) => {
-    if (field.exists) {
-      if (!data.some((security) => field.exists?.(security[field.field as keyof Security], security))) {
-        acc.push(field);
+  if (!includeHeaders) {
+    let index = 0;
+    for (const field of fields) {
+      if (fieldsWithNoData.includes(field)) {
+        widths[index] = 0;
       }
-    } else {
-      if (!data.some((security) => security.hasOwnProperty(field.field))) {
-        acc.push(field);
-      }
+      index++;
     }
-    return acc;
-  }, [] as SecurityField[]);
-
-  let index = 0;
-  for (const field of fields) {
-    if (fieldsWithNoData.includes(field)) {
-      widths[index] = 0;
-    }
-    index++;
   }
 
   if (contain) {
-    const totalWidths = widths.reduce((acc, w) => acc + (includeHeaders ? w + MARGIN : w > 0 ? w : 0), 0);
+    const totalWidths = widths.reduce((acc, w) => acc + w, 0);
     let overflow =  totalWidths - Number((dropdownWidth as string).replace("px", ""));
     if (overflow > 0) {
       const sortedHideFields = fields.slice().sort((a, b) => {

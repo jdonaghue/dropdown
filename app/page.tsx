@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { createRef, useLayoutEffect, useState } from "react";
 import numeral from "numeral";
 
 import { SECURITY_COLUMNS } from "@/packages/components/dropdown/security";
@@ -32,13 +32,14 @@ const fields = SECURITY_COLUMNS.concat({
 
 const StyledDynamicHeader = styled(DynamicHeader)`
   font-weight: bold;
-  line-height: 1em;
-  width: 700px;
   white-space: nowrap;
+  width: 700px;
   padding: 0.75rem 1.16666667rem !important;
   user-select: none;
   position: sticky;
   top: 0;
+  z-index: 99;
+  font-size: 14px;
 
   border: 1px solid grey;
   background: #AAA;
@@ -46,6 +47,7 @@ const StyledDynamicHeader = styled(DynamicHeader)`
   @media only screen and (max-width: 1028px) {
     & {
       width: 80vw;
+      overflow: hidden;
     }
   }
 
@@ -55,7 +57,22 @@ const StyledDynamicHeader = styled(DynamicHeader)`
 ` as typeof DynamicHeader;
 
 export default function Home() {
+  const [width, setWidth] = useState<number>(0);
+  const [fontSize, setFontSize] = useState<number>(0);
   const [securitiesCollection, setSecuritiesCollection] = React.useState<Security[]>((securitiesWithMv as unknown as Security[]).slice(0, 100));
+  const ref = createRef<HTMLElement>();
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      const input = ref.current.querySelector("input.search")?.nextElementSibling;
+      const rect = (input ?? ref.current).getBoundingClientRect();
+      const width = rect.width;
+
+      const computed = window.getComputedStyle(input ?? ref.current);
+      setFontSize(Number(computed.fontSize.replace("px", "")));
+      setWidth(width);
+    }
+  }, []);
 
   return (
     <>
@@ -65,25 +82,25 @@ export default function Home() {
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown/blob/main/packages/components/dropdown/search.ts">Search implementation on Github</a></div>
       </div>
       <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen p-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
-        <main className="flex flex-col gap-8 row-start-2 items-center justify-items-center">
-          <SecuritiesDDProvider>
+        <main ref={ref} className="flex flex-col gap-8 row-start-2 items-center justify-items-center">
+          <SecuritiesDDProvider width={width}>
             <SecuritiesDDConsumer>
               {
                 (props) => {
+                  console.log("here", props?.width, fontSize);
                   const template = props?.compileTemplate(securitiesCollection, {
                     securities: securitiesWithMv,
-                    width: "700px",
+                    width: `${props?.width ?? 0}px`,
                     fields,
                     includeHeaders: true,
                     contain: true,
-                    uuid: "header"
+                    uuid: "header",
+                    fontSize: `${fontSize}px`,
                   });
 
                   return (
                     <StyledDynamicHeader
                       fields={fields}
-                      // sort={fields[0].field}
-                      // direction="ASC"
                       onClick={() => true}
                       template={template ?? []}
                     />
@@ -95,6 +112,7 @@ export default function Home() {
               securitiesCollection.concat([{} as Security]).map((security) => {
                 return (
                   <SecuritiesDD
+
                     key={security?.defaultSecurityId ?? "empty"}
                     className="security-dropdown"
                     securities={securitiesWithMv}

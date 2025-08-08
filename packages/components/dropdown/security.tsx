@@ -211,7 +211,7 @@ const SECURITY_COLUMNS_MAP:  Record<string, SecurityField> = SECURITY_COLUMNS.re
 }, {});
 
 export const calculateColumnTemplateFromMap = (config: TemplateConfig) => {
-  const {
+  let {
     securities = [],
     width,
     fields = SECURITY_COLUMNS,
@@ -219,9 +219,10 @@ export const calculateColumnTemplateFromMap = (config: TemplateConfig) => {
     contain = true,
     includeHeaders = false,
     uuid = "",
+    fontSize = "",
   } = config;
 
-  return origCalcTemplate(securities, width, fields, uuid, node, includeHeaders, contain);
+  return origCalcTemplate(securities, width, fontSize = "", fields, uuid, node, includeHeaders, contain);
 };
 
 export const Cell = styled(StyledCell)`

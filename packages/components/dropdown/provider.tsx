@@ -6,8 +6,12 @@ import { Security, TemplateConfig } from "@/packages/types/types";
 
 import { calculateColumnTemplateFromMap } from "./security";
 
+type Props = {
+  width?: number;
+} & PropsWithChildren;
 
 export type SecurityContextValue = {
+  width?: number;
   templateForText: string[];
   templateForOptions: string[];
   compileTemplate: (
@@ -51,14 +55,14 @@ const memoCalculateTemplate = (method: (securities: Security[], config: Template
   };
 };
 
-export default class SecuritiesDDProvider extends Component<PropsWithChildren> {
+export default class SecuritiesDDProvider extends Component<Props> {
   securities: Record<string, Security>;
 
   state: SecurityContextState;
 
   cache: Record<string, string[]>;
 
-  constructor(props: PropsWithChildren) {
+  constructor(props: Props) {
     super(props);
 
     this.securities = {};
@@ -66,12 +70,24 @@ export default class SecuritiesDDProvider extends Component<PropsWithChildren> {
 
     this.state = {
       value: {
+        width: props.width,
         templateForText: [] as string[],
         templateForOptions: [] as string[],
         compileTemplate: this.compileTemplate,
         registerSecuritiesWithProviderMemoized: this.registerSecuritiesWithProviderMemoized,
       },
     };
+  }
+
+  componentDidUpdate(prevProps: Readonly<Props>): void {
+    if (prevProps.width != this.props.width) {
+      this.setState({
+        value: {
+          ...this.state.value,
+          width: this.props.width,
+        }
+      });
+    }
   }
 
   registerSecuritiesWithProviderMemoized = (securities: Security[], sort: keyof Security, sortDirection: "ASC" | "DESC", compileConfig: TemplateConfig, type: TemplateType) => {
@@ -95,9 +111,6 @@ export default class SecuritiesDDProvider extends Component<PropsWithChildren> {
    * `securities` and `config`.
    */
   compileTemplate = memoCalculateTemplate(( securities: Security[], config: TemplateConfig) => {
-    if (!securities?.length) {
-      return [];
-    }
     return calculateColumnTemplateFromMap({
       ...config,
       securities,
