@@ -37,6 +37,8 @@ const StyledDynamicHeader = styled(DynamicHeader)`
   white-space: nowrap;
   padding: 0.75rem 1.16666667rem !important;
   user-select: none;
+  position: sticky;
+  top: 0;
 
   border: 1px solid grey;
   background: #AAA;
