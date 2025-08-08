@@ -69,9 +69,9 @@ export const formatAsString = (formatter: SecurityField['formatter'], value: any
   return formatCache[key];
 };
 
-export function calculateColumnTemplate(data: Security[], width: string, fields: SecurityField[], uuid: string, currentNode?: (HTMLElement | null), showHeaders = false, contain = false) {
+export function calculateColumnTemplate(data: Security[], width: string, fields: SecurityField[], uuid: string, currentNode?: (HTMLElement | null), includeHeaders = false, contain = false) {
   const sortedData = data.map(({ defaultSecurityId }: Partial<Security> = { defaultSecurityId: "empty" }) => defaultSecurityId).sort();
-  const cacheKey = `${JSON.stringify(sortedData)}-${showHeaders === true ? "true" : "false"}-${contain === true ? "true" : "false"}`;
+  const cacheKey = `${JSON.stringify(sortedData)}-${includeHeaders === true ? "true" : "false"}-${contain === true ? "true" : "false"}`;
 
   if (templateCache[cacheKey]) {
     return templateCache[cacheKey];
@@ -104,7 +104,7 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
 
     let minWidth = 0;
 
-    if (showHeaders && field.header) {
+    if (includeHeaders && field.header) {
       node.innerText = field.header;
       minWidth = node.offsetWidth;
     }
@@ -146,7 +146,7 @@ export function calculateColumnTemplate(data: Security[], width: string, fields:
   }
 
   if (contain) {
-    const totalWidths = widths.reduce((acc, w) => acc + (showHeaders ? w + MARGIN : w > 0 ? w : 0), 0);
+    const totalWidths = widths.reduce((acc, w) => acc + (includeHeaders ? w + MARGIN : w > 0 ? w : 0), 0);
     let overflow =  totalWidths - Number((dropdownWidth as string).replace("px", ""));
     if (overflow > 0) {
       const sortedHideFields = fields.slice().sort((a, b) => {

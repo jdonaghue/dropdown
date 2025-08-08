@@ -217,11 +217,11 @@ export const calculateColumnTemplateFromMap = (config: TemplateConfig) => {
     fields = SECURITY_COLUMNS,
     node,
     contain = true,
-    showHeaders = false,
+    includeHeaders = false,
     uuid = "",
   } = config;
 
-  return origCalcTemplate(securities, width, fields, uuid, node, showHeaders, contain);
+  return origCalcTemplate(securities, width, fields, uuid, node, includeHeaders, contain);
 };
 
 export const Cell = styled(StyledCell)`

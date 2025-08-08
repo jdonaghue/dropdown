@@ -637,7 +637,7 @@ const composeCompileConfiguration = (instance: InternalSecuritiesDD, forceNoHead
     securities,
     width,
     fields,
-    showHeaders: !noHeaders && !forceNoHeaders,
+    includeHeaders: noHeaders === false || (noHeaders == null && !forceNoHeaders),
     contain,
     node: (instance.dropdownRef as any)?.current?.searchRef?.current,
     uuid,

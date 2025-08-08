@@ -19,9 +19,9 @@ type CellProps = {
 type DynamicHeaderProps = {
   template: string[];
   className?: string;
-  onClick: (field: SecurityField) => void;
-  sort: keyof Security | undefined;
-  direction: 'ASC' | 'DESC';
+  onClick?: (field: SecurityField) => void;
+  sort?: keyof Security | undefined;
+  direction?: 'ASC' | 'DESC';
   Cell?: typeof StyledCell;
   Grid?: typeof StyledGrid;
   fields: SecurityField[];
@@ -95,10 +95,10 @@ function renderHeader(
   );
 }
 
-export default memo(function DynamicHeader({
+const DynamicHeader = memo(function ({
   template,
   className,
-  onClick,
+  onClick = () => true,
   sort,
   direction,
   Cell = StyledCell,
@@ -117,3 +117,5 @@ export default memo(function DynamicHeader({
     </Grid>
   );
 });
+
+export default DynamicHeader;

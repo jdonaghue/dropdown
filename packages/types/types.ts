@@ -120,6 +120,6 @@ export type TemplateConfig = {
   fields: SecurityField[];
   node?: HTMLElement | null;
   contain?: boolean;
-  showHeaders?: boolean;
+  includeHeaders?: boolean;
   uuid: string;
 };
