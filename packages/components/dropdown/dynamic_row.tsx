@@ -101,15 +101,9 @@ export function calculateColumnTemplate(data: Security[], width: string, fontSiz
   node.style.visibility = "hidden";
   node.style.display = "inline";
   node.style.paddingRight = `${MARGIN}px`;
-  node.style.fontSize = fontSize;
+  node.style.fontSize = fontSize || "14px";
   node.dataset.uuid = uuid;
   document.body.appendChild(node);
-
-  // if (window.getComputedStyle(node).fontSize === "12px") {
-  //   console.log({ here: "12px", uuid, fontSize, currentNode, node, contain, includeHeaders, width });
-  // } else {
-  //   console.log({ here: "not12px", uuid, fontSize, currentNode, node, contain, includeHeaders, width });
-  // }
 
   const widths = fields.map((field, i) => {
     if (field == null) {
