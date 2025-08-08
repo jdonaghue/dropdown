@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createRef, useLayoutEffect, useState } from "react";
+import React, { createRef, useEffect, useLayoutEffect, useState } from "react";
 import numeral from "numeral";
 
 import { SECURITY_COLUMNS } from "@/packages/components/dropdown/security";
@@ -11,7 +11,6 @@ import securities from "../securities.json";
 import DynamicHeader from "@/packages/components/dropdown/dynamic_header";
 import SecuritiesDDConsumer from "@/packages/components/dropdown/consumer";
 import styled from "styled-components";
-
 
 const securitiesWithMv = (securities as unknown as Security[])
   .map((sec) => {
@@ -57,10 +56,15 @@ const StyledDynamicHeader = styled(DynamicHeader)`
 ` as typeof DynamicHeader;
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false)
   const [width, setWidth] = useState<number>(0);
   const [fontSize, setFontSize] = useState<number>(0);
   const [securitiesCollection, setSecuritiesCollection] = React.useState<Security[]>((securitiesWithMv as unknown as Security[]).slice(0, 100));
   const ref = createRef<HTMLElement>();
+
+  useEffect(() => {
+		setMounted(true)
+	}, [])
 
   useLayoutEffect(() => {
     if (ref.current) {
@@ -73,6 +77,10 @@ export default function Home() {
       setWidth(width);
     }
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <>
