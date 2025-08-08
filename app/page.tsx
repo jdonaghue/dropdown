@@ -6,7 +6,7 @@ import numeral from "numeral";
 import { SECURITY_COLUMNS } from "@/packages/components/dropdown/security";
 import { Security } from "@/packages/types/types";
 import SecuritiesDD from "@/packages/components/dropdown";
-import SecuritiesDDProvider from "@/packages/components/dropdown/provider";
+import SecuritiesDDProvider, { SecurityContextValue } from "@/packages/components/dropdown/provider";
 import securities from "../securities.json";
 import DynamicHeader from "@/packages/components/dropdown/dynamic_header";
 import SecuritiesDDConsumer from "@/packages/components/dropdown/consumer";
@@ -55,16 +55,43 @@ const StyledDynamicHeader = styled(DynamicHeader)`
   }
 ` as typeof DynamicHeader;
 
+const Header = (props: {
+  fontSize: number;
+  securities: Security[];
+} & SecurityContextValue) => {
+  const [template, setTemplate] = useState<string[] | undefined>();
+
+  useEffect(() => {
+    setTemplate(
+      props.compileTemplate(props.securities, {
+        securities: securitiesWithMv,
+        width: `${props?.width ?? 0}px`,
+        fields,
+        includeHeaders: true,
+        contain: true,
+        uuid: "header",
+        fontSize: `${props.fontSize}px`,
+      })
+    );
+  }, [props.width, props.fontSize, props.securities]);
+
+  if (template == null) {
+    return null;
+  }
+
+  return (
+    <StyledDynamicHeader
+      fields={fields}
+      template={template}
+    />
+  );
+}
+
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
   const [width, setWidth] = useState<number>(0);
   const [fontSize, setFontSize] = useState<number>(0);
   const [securitiesCollection, setSecuritiesCollection] = React.useState<Security[]>((securitiesWithMv as unknown as Security[]).slice(0, 100));
   const ref = createRef<HTMLElement>();
-
-  useEffect(() => {
-		setMounted(true)
-	}, [])
 
   useLayoutEffect(() => {
     if (ref.current) {
@@ -77,10 +104,6 @@ export default function Home() {
       setWidth(width);
     }
   }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <>
@@ -95,24 +118,7 @@ export default function Home() {
             <SecuritiesDDConsumer>
               {
                 (props) => {
-                  console.log("here", props?.width, fontSize);
-                  const template = props?.compileTemplate(securitiesCollection, {
-                    securities: securitiesWithMv,
-                    width: `${props?.width ?? 0}px`,
-                    fields,
-                    includeHeaders: true,
-                    contain: true,
-                    uuid: "header",
-                    fontSize: `${fontSize}px`,
-                  });
-
-                  return (
-                    <StyledDynamicHeader
-                      fields={fields}
-                      onClick={() => true}
-                      template={template ?? []}
-                    />
-                  );
+                  return <Header {...props} templateForText={[]} templateForOptions={[]} fontSize={fontSize} securities={securitiesCollection ?? []} />;
                 }
               }
             </SecuritiesDDConsumer>
