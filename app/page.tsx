@@ -114,8 +114,8 @@ export default function Home() {
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown">Source on Github</a></div>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown/blob/main/packages/components/dropdown/search.ts">Search implementation on Github</a></div>
         <div className="mt-8">
-          <h3>Things to try:</h3>
-          <ul className="text-left list-none">
+          <h3 className="text-center">Things to try:</h3>
+          <ul className="text-left w-[80%] ml-[10%] list-none">
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Searches are tokenized by spaces unless within quotes</div>
