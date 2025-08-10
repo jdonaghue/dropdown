@@ -139,7 +139,7 @@ export default function Home() {
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">The columns for each data point widths are calculated dynamically and take into account every selected security across all of the dropdowns</div>
+              <div className="w-[90%] inline-block align-top">The columns widths for each data point are calculated dynamically and take into account every selected security across all of the dropdowns</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
