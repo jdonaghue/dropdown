@@ -147,7 +147,7 @@ export default function Home() {
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Property and state changes within each dropdown are intercepted and a calculation is performed to determine if they should be evaluated <b>immediately</b> or should instead be <b>deferred</b> and processed asynchronously</div>
+              <div className="w-[90%] inline-block align-top">Property and state changes within each dropdown are intercepted and a calculation is performed to determine if they should be evaluated <b>immediately</b> or should instead be <b>deferred</b> and then processed asynchronously</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
