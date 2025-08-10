@@ -122,6 +122,7 @@ export default function Home() {
             <li>- Search for exact matches</li>
             <li>- Search for starts-with matches</li>
             <li>- Search for contains matches</li>
+            <li>- Notice selected securities are disabled in the expanded dropdowns</li>
             <li>- Change selected values and watch the column widths recalculate</li>
             <li>- Delete the securities with larger names to watch columns recalculate and even new columns that wouldn't previously fit appear</li>
             <li>- Notice how fast they render and how the column sizing stays in sync across all selected securities</li>
