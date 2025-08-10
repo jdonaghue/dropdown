@@ -111,18 +111,18 @@ export default function Home() {
         <h1>A fast, rich and dynamic React Dropdown component</h1>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown">Source on Github</a></div>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown/blob/main/packages/components/dropdown/search.ts">Search implementation on Github</a></div>
-        <div>
+        <div className="mt-[100px]">
           <h3>Things to try:</h3>
           <ul>
-            <li>Searches are tokenized by spaces unless within quotes</li>
-            <li>Search on dates</li>
-            <li>Search with quotes to group tokens across spaces</li>
-            <li>Search for exact matches</li>
-            <li>Search for starts-with matches</li>
-            <li>Search for contains matches</li>
-            <li>Change selected values and watch the column widths recalculate</li>
-            <li>Delete the securities with larger names to watch columns recalculate and even new columns that wouldn't previously fit appear</li>
-            <li>Notice how fast they render and how the column sizing stays in sync across all selected securities</li>
+            <li>- Searches are tokenized by spaces unless within quotes</li>
+            <li>- Search on dates</li>
+            <li>- Search with quotes to group tokens across spaces</li>
+            <li>- Search for exact matches</li>
+            <li>- Search for starts-with matches</li>
+            <li>- Search for contains matches</li>
+            <li>- Change selected values and watch the column widths recalculate</li>
+            <li>- Delete the securities with larger names to watch columns recalculate and even new columns that wouldn't previously fit appear</li>
+            <li>- Notice how fast they render and how the column sizing stays in sync across all selected securities</li>
           </ul>
         </div>
       </div>
