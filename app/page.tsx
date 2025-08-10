@@ -117,43 +117,43 @@ export default function Home() {
           <h3>Things to try:</h3>
           <ul className="text-left list-none">
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Searches are tokenized by spaces unless within quotes</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Search on dates</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Search with quotes to group tokens across spaces</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Search for exact matches</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Search for starts-with matches</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Search for contains matches</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Notice selected securities are disabled in the expanded dropdowns</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Change selected values and watch the column widths recalculate</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Delete the securities with larger names to watch columns recalculate and even new columns that wouldn't previously fit appear</div>
             </li>
             <li className="box-decoration-clone">
-              <div className="w-[4%] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
               <div className="w-[90%] inline-block align-top">Notice how fast they render and how the column sizing stays in sync across all selected securities</div>
             </li>
           </ul>
