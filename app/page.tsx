@@ -118,27 +118,28 @@ export default function Home() {
           <ul className="text-left w-[80%] ml-[10%] list-none">
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Searches are tokenized by spaces unless within quotes</div>
+              <div className="w-[90%] inline-block align-top">Expanded dropdowns searches are tokenized by spaces unless within quotes</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Search on dates</div>
+              <div className="w-[90%] inline-block align-top">Expand dropdown and search on dates (`2025-10` or `10/2025`, supports various formats)</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Search with quotes to group tokens across spaces</div>
+              <div className="w-[90%] inline-block align-top">Expand dropdown and search with quotes to group tokens across spaces (`"
+Kozey - Ja"`)</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Search for exact matches</div>
+              <div className="w-[90%] inline-block align-top">Expand dropdown and search for exact matches</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Search for starts-with matches</div>
+              <div className="w-[90%] inline-block align-top">Expand dropdown and search for starts-with matches</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Search for contains matches</div>
+              <div className="w-[90%] inline-block align-top">Expand dropdown and search for contains matches</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
