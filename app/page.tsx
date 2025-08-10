@@ -113,7 +113,7 @@ export default function Home() {
         <h1>A fast, rich and dynamic React Dropdown component</h1>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown">Source on Github</a></div>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown/blob/main/packages/components/dropdown/search.ts">Search implementation on Github</a></div>
-        <div className="mt-[100px]">
+        <div className="mt-8">
           <h3>Things to try:</h3>
           <ul className="text-left list-none">
             <li className="box-decoration-clone">
@@ -160,7 +160,7 @@ export default function Home() {
         </div>
       </div>
       <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen p-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
-        <main ref={ref} className="flex flex-col gap-8 row-start-2 items-center justify-items-center">
+        <main ref={ref} className="flex flex-col gap-8 items-center justify-items-center">
           <SecuritiesDDProvider width={width}>
             <SecuritiesDDConsumer>
               {
