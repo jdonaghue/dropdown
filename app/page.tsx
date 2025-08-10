@@ -111,56 +111,85 @@ export default function Home() {
     <>
       <div className="p-[20px] max-[1028px]:text-center flex-col items-center justify-items-center ">
         <h1>A fast, rich and dynamic React Dropdown component</h1>
+        <div className="mb-[10px]"><b><a className="text-lg" href="#dropdown-container">Skip down to see the dropdowns below!</a></b></div>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown">Source on Github</a></div>
         <div><a className="text-lg" target="_blank" rel="noopener noreferrer" href="https://github.com/jdonaghue/dropdown/blob/main/packages/components/dropdown/search.ts">Search implementation on Github</a></div>
-        <div className="mt-8">
-          <h3 className="text-center">Things to try:</h3>
+        <div className="mt-8 max-w-[700px]">
+          <h3 className="text-center">Things to know:</h3>
           <ul className="text-left w-[80%] ml-[10%] list-none">
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expanded dropdowns searches are tokenized by spaces unless within quotes</div>
+              <div className="w-[90%] inline-block align-top">Expanded dropdown search queries are parsed and tokenized by spaces unless within quotes</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expand dropdown and search on dates (`2025-10` or `10/2025`, supports various formats)</div>
+              <div className="w-[90%] inline-block align-top">Notice how the selected securities are disabled within the expanded dropdowns</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expand dropdown and search with quotes to group tokens across spaces (`"
-Kozey - Ja"`)</div>
+              <div className="w-[90%] inline-block align-top">Notice how fast the dropdowns render and how the column sizing stays in sync across all of the selected securities</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expand dropdown and search for exact matches</div>
+              <div className="w-[90%] inline-block align-top">There are <pre className="bg-[#eeeeee] inline">100 rendered dropdowns</pre> on this page initially</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expand dropdown and search for starts-with matches</div>
+              <div className="w-[90%] inline-block align-top">There are <pre className="bg-[#eeeeee] inline">200 options</pre> per dropdown that are rendered</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expand dropdown and search for contains matches</div>
+              <div className="w-[90%] inline-block align-top">The columns for each data point widths are calculated dynamically and take into account every selected security across all of the dropdowns</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Notice selected securities are disabled in the expanded dropdowns</div>
+              <div className="w-[90%] inline-block align-top"><pre className="bg-[#eeeeee] inline">React contexts</pre> are used to keep track of the column widths across dropdowns. They pass these widths directly to the dropdowns which are registered within the context <pre className="bg-[#eeeeee] inline">consumers</pre>. So the context provider can be put at any point in the component tree as long as it is an ancestor of all the related dropdowns.</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Change selected values and watch the column widths recalculate</div>
+              <div className="w-[90%] inline-block align-top">Property and state changes within each dropdown are intercepted and a calculation is performed to determine if they should be evaluated <pre className="bg-[#eeeeee] inline">immediately</pre> or should instead be <pre className="bg-[#eeeeee] inline">deferred</pre> and processed asynchronously</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Delete the securities with larger names to watch columns recalculate and even new columns that wouldn't previously fit appear</div>
+              <div className="w-[90%] inline-block align-top">When a dropdown is opened, any <pre className="bg-[#eeeeee] inline">deferred</pre> props or state changes that had been queued are processed <pre className="bg-[#eeeeee] inline">immediately</pre>, but ideally have already been processed asynchronously</div>
+            </li>
+          </ul>
+          <div className="text-center mt-[10px]"><b><a className="text-lg" href="#dropdown-container">Skip down to see the dropdowns below!</a></b></div>
+
+          <h3 className="text-center">Things to try:</h3>
+          <ul className="text-left w-[90%] ml-[10%] list-none">
+            <li className="box-decoration-clone">
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[90%] inline-block align-top">Expand a dropdown and search on dates, supports various formats, <b>example:</b> <pre className="bg-[#eeeeee] inline">2025-10</pre> <b>or</b> <pre className="bg-[#eeeeee] inline">10/2025</pre></div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Notice how fast they render and how the column sizing stays in sync across all selected securities</div>
+              <div className="w-[90%] inline-block align-top">Expand a dropdown and search with quotes to group tokens across spaces, <b>example:</b> <pre className="bg-[#eeeeee] inline">"Kozey - Ja"</pre></div>
+            </li>
+            <li className="box-decoration-clone">
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[90%] inline-block align-top">Expand a dropdown and search for <pre className="bg-[#eeeeee] inline">"exact"</pre> matches, <b>example:</b> <pre className="bg-[#eeeeee] inline">hmab</pre> <b>or</b> <pre className="bg-[#eeeeee] inline">hm 82.00</pre></div>
+            </li>
+            <li className="box-decoration-clone">
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[90%] inline-block align-top">Expand a dropdown and search for <pre className="bg-[#eeeeee] inline">"starts-with"</pre> matches, <b>example:</b> <pre className="bg-[#eeeeee] inline">hm</pre> <b>or</b> <pre className="bg-[#eeeeee] inline">hm 8</pre></div>
+            </li>
+            <li className="box-decoration-clone">
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[90%] inline-block align-top">Expand a dropdown and search for <pre className="bg-[#eeeeee] inline">"contains"</pre> matches, <b>example:</b> <pre className="bg-[#eeeeee] inline">ma</pre> <b>or</b> <pre className="bg-[#eeeeee] inline">hm 2.0</pre></div>
+            </li>
+            <li className="box-decoration-clone">
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[90%] inline-block align-top">Expand a dropdown and change selected values and watch the column widths recalculate</div>
+            </li>
+            <li className="box-decoration-clone">
+              <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
+              <div className="w-[90%] inline-block align-top">Delete the securities with larger names and watch the columns recalculate their widths and even watch new columns that wouldn't previously fit appear</div>
             </li>
           </ul>
         </div>
       </div>
-      <div className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen p-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+      <div id="dropdown-container" className="grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen p-8 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
         <main ref={ref} className="flex flex-col gap-8 items-center justify-items-center">
           <SecuritiesDDProvider width={width}>
             <SecuritiesDDConsumer>
