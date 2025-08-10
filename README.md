@@ -8,7 +8,7 @@ _note: this is not packaged for distribution, it is available here within this N
 
 ### Features
 
-- Advanced searching that auto-sorts by most relevant results
+- Advanced searching that auto-sorts by most relevant results. [See info below](#Search/Sort-implementation)
 - Dynamically calculates data property widths to determine if overflow and which columns should be hidden or truncated if needed
 - Only hides or truncates the columns that it needs to in order to remove overflow
 - Maintains a context over all dropdown instances in order to take them all into consideration when calculating the dynamic column widths
