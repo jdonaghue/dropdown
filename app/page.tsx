@@ -119,7 +119,7 @@ export default function Home() {
           <ul className="text-left w-[80%] ml-[10%] list-none">
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expanded dropdowns search queries are parsed and tokenized by spaces unless within quotes</div>
+              <div className="w-[90%] inline-block align-top">Expanded dropdowns search queries are tokenized by spaces unless within quotes</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
