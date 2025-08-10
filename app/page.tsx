@@ -42,6 +42,7 @@ const StyledDynamicHeader = styled(DynamicHeader)`
 
   border: 1px solid grey;
   background: #DDD;
+  cursor: default;
 
   @media only screen and (max-width: 1028px) {
     & {
@@ -52,6 +53,7 @@ const StyledDynamicHeader = styled(DynamicHeader)`
 
   > div {
     user-select: none;
+    cursor: default;
   }
 ` as typeof DynamicHeader;
 
