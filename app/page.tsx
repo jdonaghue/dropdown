@@ -119,39 +119,39 @@ export default function Home() {
           <ul className="text-left w-[80%] ml-[10%] list-none">
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Expanded dropdown search queries are parsed and tokenized by spaces unless within quotes</div>
+              <div className="w-[90%] inline-block align-top">Expanded dropdowns search queries are parsed and tokenized by spaces unless within quotes</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Notice how the selected securities are disabled within the expanded dropdowns</div>
+              <div className="w-[90%] inline-block align-top">The selected securities are disabled within the expanded dropdowns</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Notice how fast the dropdowns render and how the column sizing stays in sync across all of the selected securities</div>
+              <div className="w-[90%] inline-block align-top">Notice how <b>fast</b> the dropdowns render and how the column sizing stays in sync across all of the selected securities</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">There are <pre className="bg-[#eeeeee] inline">100 rendered dropdowns</pre> on this page initially</div>
+              <div className="w-[90%] inline-block align-top">There are <b>100 rendered dropdowns</b> on this page initially</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">There are <pre className="bg-[#eeeeee] inline">200 options</pre> per dropdown that are rendered</div>
+              <div className="w-[90%] inline-block align-top">There are <b>200 options</b> per dropdown that are rendered</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">The columns widths for each data point are calculated dynamically and take into account every selected security across all of the dropdowns, columns are hidden and/or truncated depending on the configured priority of the columns underlying datapoint</div>
+              <div className="w-[90%] inline-block align-top">The <b>columns widths</b> for each data point <b>are calculated dynamically</b> and take into account every selected security across all of the dropdowns, columns are hidden and/or truncated depending on the configured priority of the columns underlying datapoint</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top"><pre className="bg-[#eeeeee] inline">React contexts</pre> are used to keep track of the column widths across dropdowns. They pass these widths directly to the dropdowns which are registered within the context <pre className="bg-[#eeeeee] inline">consumers</pre>. So the context provider can be put at any point in the component tree as long as it is an ancestor of all the related dropdowns.</div>
+              <div className="w-[90%] inline-block align-top"><b>React contexts</b> are used to keep track of the column widths across dropdowns. They pass these widths directly to the dropdowns which are registered within the context <b>consumers</b>. So the context provider can be put at any point in the component tree as long as it is an ancestor of all the related dropdowns.</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">Property and state changes within each dropdown are intercepted and a calculation is performed to determine if they should be evaluated <pre className="bg-[#eeeeee] inline">immediately</pre> or should instead be <pre className="bg-[#eeeeee] inline">deferred</pre> and processed asynchronously</div>
+              <div className="w-[90%] inline-block align-top">Property and state changes within each dropdown are intercepted and a calculation is performed to determine if they should be evaluated <b>immediately</b> or should instead be <b>deferred</b> and processed asynchronously</div>
             </li>
             <li className="box-decoration-clone">
               <div className="w-[15px] align-[-webkit-baseline-middle] inline-block">*</div>
-              <div className="w-[90%] inline-block align-top">When a dropdown is opened, any <pre className="bg-[#eeeeee] inline">deferred</pre> props or state changes that had been queued are processed <pre className="bg-[#eeeeee] inline">immediately</pre>, but ideally have already been processed asynchronously</div>
+              <div className="w-[90%] inline-block align-top">When a dropdown is opened, any <b>deferred</b> props or state changes that had been queued are processed <b>immediately</b>, but ideally have already been processed asynchronously</div>
             </li>
           </ul>
           <div className="text-center mt-[10px]"><b><a className="text-lg" href="#dropdown-container">Skip down to see the dropdowns below!</a></b></div>
